@@ -20,14 +20,14 @@ public class DeptDAO {
 	
 	//static final field ... (SQL Query)
 	static final String SELECT_ALL = "SELECT * FROM DEPARTMENTS";
-	static final String SELECT_DETAIL = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
-	static final String INSERT = "INSERT INTO DEPARTMENTS VALUES( ?, ?, ?, ? )";
+	static final String SELECT_DETAIL = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = ? ";
+	static final String INSERT = "INSERT INTO DEPARTMENTS VALUES( ?, ?, ?, ? ) ";
 	static final String UPDATE = "UPDATE DEPARTMENTS " + 
-								 "SET DEPARTMENTS_NAME = ?, " + 
+								 "SET DEPARTMENT_NAME = ?, " + 
 								 "MANAGER_ID = ?, " +
 								 "LOCATION_ID = ? " +
-								 "WHERE DEPARTMENT_ID = ?";
-	static final String DELETE = "DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+								 "WHERE DEPARTMENT_ID = ? ";
+	static final String DELETE = "DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID = ? ";
 	
 	//0.DeptDTO 만들기
 	public DeptDTO makeDept(ResultSet rs) throws SQLException {
@@ -103,6 +103,14 @@ public class DeptDAO {
 		return resultCount;
 	}
 
+	
+	/*
+		static final String UPDATE = "UPDATE DEPARTMENTS " + 
+								 "SET DEPARTMENT_NAME = ?, " + 
+								 "MANAGER_ID = ?, " +
+								 "LOCATION_ID = ? " +
+								 "WHERE DEPARTMENT_ID = ?";
+	 */
 	//4.(부서코드로 수정)
 	public int updateDept(DeptDTO dept) {
 		resultCount = 0;	//삽입 건수 초기화
@@ -118,7 +126,7 @@ public class DeptDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.dbDisconnect(conn, st, null);
+			DBUtil.dbDisconnect(conn, pst, null);
 		}
 		
 		return resultCount;
